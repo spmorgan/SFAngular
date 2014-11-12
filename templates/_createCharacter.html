@@ -1,0 +1,29 @@
+<div>
+    <h1>Welcome to SuperGame ({{currentPage}})</h1>
+
+    <h2>Create Character</h2>
+    <h3>Step {{currentStep}} of 3</h3>
+    <label>name:</label><input type="text" ng-model="character.name">
+    <br>
+    <label>class: </label>
+    <select ng-model="character.class" ng-change="classChanged()" ng-options="class for class in classList"></select>
+    <br>
+    <img style="width: 200px" ng-src="{{classImageUrl}}">
+    <br>
+    <button ng-disabled="!character.name" ng-click="createCharacter()">Create Character</button>
+
+    <div ng-controller="StatCtrl as statCtrl">
+        <div ng-hide="!(characterCreated)">
+            <div><h3><span>Your characters name is: </span>{{character.name}}</h3></div>
+            Your characters class is: {{character.class}}
+            <div><button ng-click="statCtrl.characterService.rollStats()">Roll Stats</button></div>
+            <div>
+                <H3>stats</h3>
+                <ul>
+                    <li ng-repeat="stat in character.stats">{{stat.name}}:{{stat.value}}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

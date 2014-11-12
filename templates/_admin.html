@@ -1,0 +1,26 @@
+<H1>Monster Admin</H1>
+<table border="1">
+    <thead>
+    <tr>id</tr>
+    <tr>name</tr>
+    </thead>
+    <tr ng-repeat="monster in monsterList">
+        <td>{{monster.id}}</td>
+        <td>{{monster.name}}</td>
+        <td><button ng-click="editMonster(monster)">edit</button></td>
+    </tr>
+</table>
+<br><br>
+<div ng-show="monsterToEdit">
+    <form name="monsterEditForm" novalidate>
+        <label>id</label><input type="text" ng-model="monsterToEdit.id">
+        <label>name</label><input name="monsterName" type="text" ng-minlength="2" ng-required="true" ng-model="monsterToEdit.name">
+        <div ng-show="monsterEditForm.$error.minlength">The name is too short!</div>
+        <div ng-show="monsterEditForm.$error.required">The name is required</div>
+        <div>{{monsterEditForm}}</div>
+        <br>
+        <div>{{monsterEditForm.monsterName}}</div>
+        <button ng-disabled="monsterEditForm.$invalid || monsterEditForm.$pristine" ng-click="saveMonster()">Save</button>
+        <input type="checkbox" ng-true-value="'SuperPowerful'" ng-change="boxChanged()" ng-model="superPowerful"/>
+    </form>
+</div>
